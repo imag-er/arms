@@ -1,0 +1,24 @@
+[
+    {
+        "name": "usb typec线",
+        "id": "32002301",
+        "price": 57,
+        "owner": "lsm",
+        "time": "20230217"
+    },
+    {
+        "name": "hdmi线",
+        "id": "31012201",
+        "price": 78,
+        "owner": "ailab",
+        "time": "20221010"
+    },
+    {
+        "name": "示波器",
+        "id": "12043302",
+        "price": 2450,
+        "owner": "ailab",
+        "time": "20210101"
+    }
+
+]

@@ -19,14 +19,14 @@ func get_procfunc(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Println("received:", r.Body)
 	
-	file, err := ioutil.ReadFile("item.json")
+	raw_json, err := ioutil.ReadFile("item.json")
 
 	if err != nil {
 		fmt.Println("error:", err)
 	}
 	var items []Item
 
-	err = json.Unmarshal(file, &items)
+	err = json.Unmarshal(raw_json, &items)
 	if err != nil {
 		fmt.Println("error:", err)
 	}
@@ -34,10 +34,18 @@ func get_procfunc(w http.ResponseWriter, r *http.Request) {
 	for _, item := range items {
 		fmt.Println(item)
 	}
-	fmt.Print("111")
 
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(items)
+	w.Header().Set("Content-Type", "application/json") // 指定内容类型
+	w.Header().Set("Access-Control-Allow-Origin", "*") // 允许跨域访问
+
+	length ,err := w.Write(raw_json)
+
+	if err !=nil{
+		fmt.Println("error:",err)
+	} else {
+		fmt.Println("sent ",length," bytes")
+	}
+
 }
 func add_procfunc(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("got request ", r.Body)

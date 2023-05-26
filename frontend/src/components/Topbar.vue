@@ -10,7 +10,7 @@
         </h1>
 
 
-        <a>登录</a>|<a>注册</a>
+        <!-- <a>登录</a>|<a>注册</a> -->
 
     </div>
 </template>
@@ -25,7 +25,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 9999;
+    z-index: 5000;
     box-shadow: 0 0.1rem 25rem rgba(255, 255, 255, 0.3), 0 0 20px rgba(255, 255, 255, 0.5);
 
     text-shadow: -1px -1px 0 #000,

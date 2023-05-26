@@ -15,10 +15,7 @@ type Item struct {
 	Time  string `json:"time"`
 }
 
-func get_procfunc(w http.ResponseWriter, r *http.Request) {
-
-	fmt.Println("received:", r.Body)
-	
+func getall_procfunc(w http.ResponseWriter, r *http.Request) {
 	raw_json, err := ioutil.ReadFile("item.json")
 
 	if err != nil {
@@ -38,23 +35,36 @@ func get_procfunc(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json") // 指定内容类型
 	w.Header().Set("Access-Control-Allow-Origin", "*") // 允许跨域访问
 
-	length ,err := w.Write(raw_json)
+	length, err := w.Write(raw_json)
 
-	if err !=nil{
-		fmt.Println("error:",err)
+	if err != nil {
+		fmt.Println("error:", err)
 	} else {
-		fmt.Println("sent ",length," bytes")
+		fmt.Println("sent ", length, " bytes")
 	}
 
+	fmt.Println("-----------------")
 }
 func add_procfunc(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("got request ", r.Body)
+	fmt.Println("got ADD request ")
 	fmt.Fprint(w, r.Body)
 }
+func delete_procfunc(w http.ResponseWriter, r *http.Request) {
+	delete_id := r.FormValue("id")
+	fmt.Println("got DELETE request ", delete_id)
 
+	w.Header().Set("Content-Type", "application/json") // 指定内容类型
+	w.Header().Set("Access-Control-Allow-Origin", "*") // 允许跨域访问
+
+	fmt.Fprint(w, delete_id)
+
+	fmt.Println("-----------------")
+
+}
 func main() {
 	http.HandleFunc("/data/add", add_procfunc)
-	http.HandleFunc("/data/get", get_procfunc)
+	http.HandleFunc("/data/getall", getall_procfunc)
+	http.HandleFunc("/data/delete", delete_procfunc)
 
 	fmt.Println("server opened on http://localhost:8080")
 

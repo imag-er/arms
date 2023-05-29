@@ -46,7 +46,11 @@ func getall_procfunc(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("-----------------")
 }
 func add_procfunc(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("got ADD request ")
+	fmt.Println("got ADD request ", r.FormValue("id"))
+
+	w.Header().Set("Content-Type", "application/json") // 指定内容类型
+	w.Header().Set("Access-Control-Allow-Origin", "*") // 允许跨域访问
+
 	fmt.Fprint(w, r.Body)
 }
 func delete_procfunc(w http.ResponseWriter, r *http.Request) {
